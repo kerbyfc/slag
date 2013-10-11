@@ -7,6 +7,7 @@
 
 								 ; UTILS
 								 [org.clojure/clojure-contrib "1.2.0"]
+                 [org.clojure/tools.namespace "0.2.4"]
 
 								 ; WEB STACK
 								 [ring/ring-jetty-adapter "1.2.0"]

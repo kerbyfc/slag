@@ -1,39 +1,37 @@
 (ns slag.web
+  (:gen-class)
 	(:use
    [ring.adapter.jetty :only [run-jetty]]
    [slag.utils])
   (:require
    [compojure.route :refer  [not-found]]
-   [compojure.core  :refer  [defroutes ANY]]
-   [liberator.core  :refer  [resource run-resource defresource]]
-   [slag.web.resources n404]
+   [compojure.core  :refer  [ANY]]
+   [liberator.core  :refer  [defresource]]
    [liberator.dev   :refer  [wrap-trace]]))
 
 (declare api handler)
-(def routes (ref []))
+(def routes (ref {}))
 
 (defmacro defres
   "Create resource and make route for it"
   [name & kvs]
   `(dosync
     (defresource ~name ~@kvs)
-    (ref-set routes (conj @routes (ANY (str "/" '~name) [] ~name)))))
+    (ref-set slag.web/routes (merge @slag.web/routes { ~(keyword name) (ANY (str "/" ~name) [] ~name) } ))))
 
-(defres tst
+(macroexpand '(defres parsers
+             :available-media-types ["text/html"]
+             :handle-ok "PARSERS"))
+
+(slag.utils/include "resources")
+
+(defres parsers
   :available-media-types ["text/html"]
-  :handle-ok "yo!")
+  :handle-ok "PARSERSsdf")
 
-(defres lol2
-  :available-media-types ["text/html"]
-  :handle-ok "yo!")
+@routes
 
-(defres lol3
-  :available-media-types ["text/html"]
-  :handle-ok "dfdyo3dddd!")
-
-(def api (apply compojure.core/routes 'api (conj @routes (not-found "404"))))
+(def api (apply compojure.core/routes 'api (vals @routes)))
 (def handler (-> api (wrap-trace :header :ui)))
 
-
-
-
+(run-jetty handler {:port 8001 :join? false})
