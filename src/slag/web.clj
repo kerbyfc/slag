@@ -25,6 +25,14 @@
 
 (slag.utils/include "resources")
 
+(defmacro ss 
+	[& form]
+	(let [[root common route args res & nxt] (vec form)]
+		(println ">>>" root common route args res)
+		(println " NXT" nxt)
+		(if-not (nil? nxt)
+			`(ss ~root ~common ~@nxt))))
+
 (defres parsers
   :available-media-types ["text/html"]
   :handle-ok "PARSERSsdf")
