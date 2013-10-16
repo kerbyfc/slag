@@ -21,6 +21,11 @@
                    (resource* ~root ~common ~@nxt)
                    ~factory))))
 
+(defmacro with-req
+  [arg form]
+  `(fn [{$# :request}]
+     (apply (fn [~arg] ~form) [$#]))
+  )
 
 (reval 'slag.resources "api" (use 'slag.web 'slag.helpers))
 
