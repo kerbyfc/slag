@@ -1,6 +1,4 @@
-(ns slag.web)
-
-(do
-  (defres parsers
-    :available-media-types ["text/html"]
-    :handle-ok "PARSERSsdf"))
+(println "PARSERS" *ns*)
+(defres parsers
+  :available-media-types ["text/html"]
+  :handle-ok "PARSERSsdf")

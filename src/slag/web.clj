@@ -1,37 +1,42 @@
 (ns slag.web
   (:gen-class)
-	(:use
-   [ring.adapter.jetty :only [run-jetty]]
-   [slag.utils])
-  (:require
-   [compojure.route :refer  [not-found]]
-   [compojure.core  :refer  [ANY]]
-   [liberator.core  :refer  [defresource]]
-   [liberator.dev   :refer  [wrap-trace]]))
+	(:use slag.utils slag.loader)
+  (:require ring.adapter.jetty ring.middleware.params compojure.core liberator.core liberator.dev))
 
 (declare api handler)
 (def routes (ref {}))
 
-(defmacro defres
+(defmacro res*
   "Create resource and make route for it"
-  [name & kvs]
+  [route args & kvs]
   `(dosync
-    (defresource ~name ~@kvs)
-    (ref-set slag.web/routes (merge @slag.web/routes { ~(keyword name) (ANY (str "/" ~name) [] ~name) } ))))
+      (ref-set slag.web/routes (merge @slag.web/routes {~(keyword (clojure.string/replace route #"(/:)([\w]*)" "/$2")) (compojure.core/ANY (str "/" ~route) ~args (fn [request#] (liberator.core/run-resource request# ~@kvs)))}))))
 
-(macroexpand '(defres parsers
-             :available-media-types ["text/html"]
-             :handle-ok "PARSERS"))
+(defmacro resource*
+  [& form]
+  (let [[root common route args res & nxt] (vec form)
+        factory `(res* ~(str root route) ~args ~(merge common res))]
+    (cond (nil? nxt) factory
+          :else `(do
+                   (resource* ~root ~common ~@nxt)
+                   ~factory))))
 
-(slag.utils/include "resources")
 
-(defres parsers
-  :available-media-types ["text/html"]
-  :handle-ok "PARSERSsdf")
-
-@routes
+(reval 'slag.resources "api" (use 'slag.web 'slag.helpers))
 
 (def api (apply compojure.core/routes 'api (vals @routes)))
-(def handler (-> api (wrap-trace :header :ui)))
 
-(run-jetty handler {:port 8001 :join? false})
+(def handler (-> api
+                 ring.middleware.params/wrap-params
+                 (liberator.dev/wrap-trace :header :ui)))
+
+(defn start-service
+ [port]
+  (ring.adapter.jetty/run-jetty handler {:port port :join? false}))
+
+
+
+
+
+
+
