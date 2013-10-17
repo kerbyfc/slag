@@ -6,28 +6,57 @@
 (declare api handler)
 (def routes (ref {}))
 
-(defmacro res*
+(defmacro res-handler
   "Create resource and make route for it"
   [route args & kvs]
   `(dosync
       (ref-set slag.web/routes (merge @slag.web/routes {~(keyword (clojure.string/replace route #"(/:)([\w]*)" "/$2")) (compojure.core/ANY (str "/" ~route) ~args (fn [request#] (liberator.core/run-resource request# ~@kvs)))}))))
 
-(defmacro resource*
+(defmacro defres
   [& form]
   (let [[root common route args res & nxt] (vec form)
-        factory `(res* ~(str root route) ~args ~(merge common res))]
+        factory `(res-handler ~(str root route) ~args ~(merge common res))]
     (cond (nil? nxt) factory
           :else `(do
-                   (resource* ~root ~common ~@nxt)
+                   (defres ~root ~common ~@nxt)
                    ~factory))))
 
-(defmacro with-req
-  [arg form]
-  `(fn [{$# :request}]
-     (apply (fn [~arg] ~form) [$#]))
-  )
+(defmacro =>
+  [req & kvs]
+  (let [bindings (vec (map-indexed #(if (even? %1) (vec %2) (first %2)) (partition-by #(not (symbol? %)) (remove seq? (pop (vec kvs))))))
+        vars (vec (keep-indexed #(if (odd? %1) %2) bindings))
+        values (vec (keep-indexed #(if (even? %1) %2) bindings))]
+    (if (and (> (count values) 0) (= (count values) (count vars)))
+      `(fn [{$# :request}]
+         (apply (fn [~req ~@vars] ~(last kvs)) (apply conj [$#] (vec (map #(get-in $# %) ~values)))))
+      `(fn [{$# :request}] (apply (fn [~req] ~(last kvs)) [$#]))
+      )
+    ))
 
-(reval 'slag.resources "api" (use 'slag.web 'slag.helpers))
+(defres "servers"
+
+           {
+            :available-media-types ["text/plain"]
+            :allowed-methods [:get :put :post]
+            }
+
+
+           "/:id" [id] {
+                        :handle-ok (=> r
+                                     (format "SERVER WITH ID %s" id))
+                        }
+
+           "" [] {
+
+                  :exists? (=> r :query-params "a" a
+                             (= "asd" a))
+
+                  :handle-ok (str "SERVERS LIST")
+                  }
+
+           )
+
+;(reval 'slag.resources "api" (use 'slag.web 'slag.helpers))
 
 (def api (apply compojure.core/routes 'api (vals @routes)))
 
