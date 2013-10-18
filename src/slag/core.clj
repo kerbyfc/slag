@@ -6,6 +6,6 @@
 (defn -main
   "Run web service"
   [& args]
-  (start-service 8000))
+  ())
 
 

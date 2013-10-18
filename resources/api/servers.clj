@@ -20,7 +20,7 @@
 
          :handle-ok (=> ctx :choice c :representation :media-type mt
                         (condp = mt
-                          "text/html" (format "<html><a href='#'>Your choice: &quot;%s&quot;</a>." c)
+                          "text/html" (format "<html><a href='#'>Your choice is: &quot;%s&quot;</a>." c)
                           "text/plain" (format "Your choice: \"%s\".\n" c))
                         )
 

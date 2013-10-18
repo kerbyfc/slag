@@ -15,7 +15,3 @@
 (def handler (wrapped-handler ->
                 ring.middleware.params/wrap-params
                 (liberator.dev/wrap-trace :header :ui)))
-
-
-
-
