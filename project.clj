@@ -6,16 +6,18 @@
   :dependencies [
 
                  [org.clojure/clojure "1.5.1"]
-                 [cwk "0.1.0"]
+
+                 [cwk "0.1.3-SNAPSHOT"]
+                 [reval "0.1.0-SNAPSHOT"]
 
 								 ; UTILS
 								 [org.clojure/clojure-contrib "1.2.0"]
                  [org.clojure/tools.namespace "0.2.4"]
 
 								 ; WEB STACK
-								 [ring/ring-jetty-adapter "1.2.0"]
-                 [compojure "1.1.5"]
-                 [liberator "0.9.0"]
+								 ;[ring/ring-jetty-adapter "1.2.0"]
+                 ;[compojure "1.1.5"]
+                 ;[liberator "0.9.0"]
 
 								 ; SYSLOG STACK
                  [org.syslog4j/syslog4j "0.9.30"]
