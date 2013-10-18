@@ -14,8 +14,7 @@
 
 (map? (merge {} {:sd true}))
 
-(defn fname
-  [f]
+(defn fname [f]
   (subs (first (re-find #"(\$)[A-Za-z0-9]*" (.toString f))) 1))
 
 (defn ensure-argument
@@ -35,13 +34,13 @@
                    ~factory))))
 
 (defmacro =>
-  [req & kvs]
+  [ctx & kvs]
   (let [bindings (vec (map-indexed #(if (even? %1) (vec %2) (first %2)) (partition-by #(not (symbol? %)) (remove seq? (pop (vec kvs))))))
         vars (vec (keep-indexed #(if (odd? %1) %2) bindings))
         values (vec (keep-indexed #(if (even? %1) %2) bindings))]
     (if (and (> (count values) 0) (= (count values) (count vars)))
-      `(fn [$#] (apply (fn [~req ~@vars] ~(last kvs)) (apply conj [$#] (vec (map #(get-in $# %) ~values)))))
-      `(fn [$#] (apply (fn [~req] ~(last kvs)) [$#]))
+      `(fn [$#] (apply (fn [~ctx ~@vars] ~(last kvs)) (apply conj [$#] (vec (map #(get-in $# %) ~values)))))
+      `(fn [$#] (apply (fn [~ctx] ~(last kvs)) [$#]))
       )
     ))
 
