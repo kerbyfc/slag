@@ -15,14 +15,14 @@
 								 ; WEB STACK
 								 [ring/ring-jetty-adapter "1.2.0"]
                  [compojure "1.1.5"]
-                 ;[liberator "0.9.0"]
+                 [liberator "0.9.0"]
 
 								 ; SYSLOG STACK
-                 ;[org.syslog4j/syslog4j "0.9.30"]
-								 ;[com.sun.jna/jna "3.0.9"]
+                 [org.syslog4j/syslog4j "0.9.30"]
+								 [com.sun.jna/jna "3.0.9"]
 
-								 ;[org.apache.directory.studio/org.apache.commons.pool "1.6"]
-                 ;[org.apache.directory.studio/org.apache.logging.log4j "1.2.17"]
+								 [org.apache.directory.studio/org.apache.commons.pool "1.6"]
+                 [org.apache.directory.studio/org.apache.logging.log4j "1.2.17"]
 
 								 ; MYCROFT STACK
 								 ;[hiccup "0.3.5"]

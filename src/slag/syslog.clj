@@ -11,7 +11,7 @@
            ; EXCEPTIONS
            [org.productivity.java.syslog4j SyslogRuntimeException]
 
-           [org.productivity.java.syslog4j.server.impl.event SpecialSyslogEventHandler]
+           [org.productivity.java.syslog4j.server.impl.event Handler]
            [org.productivity.java.syslog4j.server SyslogServer SyslogServerConfigIF SyslogServerIF SyslogServerEventHandlerIF]
 
            [org.productivity.java.syslog4j.server.impl.event.printstream PrintStreamSyslogServerEventHandler]))
@@ -23,7 +23,7 @@
   []
   (def baos (ByteArrayOutputStream.))
   (def ps (PrintStream. baos))
-  (SpecialSyslogEventHandler. ps))
+  (Handler ps))
 
 (def handler (create-handler))
 
