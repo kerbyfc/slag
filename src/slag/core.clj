@@ -1,6 +1,6 @@
 (ns slag.core
 	(:use [slag.utils]
-				[slag.web :only [start-service]])
+				[slag.web])
   (:gen-class))
 
 (defn -main

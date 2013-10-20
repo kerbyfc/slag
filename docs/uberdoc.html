@@ -3029,14 +3029,14 @@ net.brehaut.ClojureTools = (function (SH) {
   };
 })(SyntaxHighlighter);
 </script><script src="docs.js" type="text/javascript"></script><link href="docs.css" rel="stylesheet" tyle="text/css" /><title>slag -- Marginalia</title></head><body><table><tr><td class="docs"><div class="header"><h1 class="project-name">slag</h1><h2 class="project-version">0.1.0-SNAPSHOT</h2><br /><p>FIXME: write description</p>
-</div><div class="dependencies"><h3>dependencies</h3><table><tr><td class="dep-name">org.clojure/clojure</td><td class="dotted"><hr /></td><td class="dep-version">1.5.1</td></tr><tr><td class="dep-name">cwk</td><td class="dotted"><hr /></td><td class="dep-version">0.1.0</td></tr><tr><td class="dep-name">org.clojure/clojure-contrib</td><td class="dotted"><hr /></td><td class="dep-version">1.2.0</td></tr><tr><td class="dep-name">org.clojure/tools.namespace</td><td class="dotted"><hr /></td><td class="dep-version">0.2.4</td></tr><tr><td class="dep-name">ring/ring-jetty-adapter</td><td class="dotted"><hr /></td><td class="dep-version">1.2.0</td></tr><tr><td class="dep-name">compojure</td><td class="dotted"><hr /></td><td class="dep-version">1.1.5</td></tr><tr><td class="dep-name">liberator</td><td class="dotted"><hr /></td><td class="dep-version">0.9.0</td></tr><tr><td class="dep-name">org.syslog4j/syslog4j</td><td class="dotted"><hr /></td><td class="dep-version">0.9.30</td></tr><tr><td class="dep-name">com.sun.jna/jna</td><td class="dotted"><hr /></td><td class="dep-version">3.0.9</td></tr><tr><td class="dep-name">org.apache.directory.studio/org.apache.commons.pool</td><td class="dotted"><hr /></td><td class="dep-version">1.6</td></tr><tr><td class="dep-name">org.apache.directory.studio/org.apache.logging.log4j</td><td class="dotted"><hr /></td><td class="dep-version">1.2.17</td></tr></table></div></td><td class="codes" style="text-align: center; vertical-align: middle;color: #666;padding-right:20px"><br /><br /><br />(this space intentionally left almost blank)</td></tr><tr><td class="docs"><div class="toc"><a name="toc"><h3>namespaces</h3></a><ul><li><a href="#slag.core">slag.core</a></li><li><a href="#slag.helpers">slag.helpers</a></li><li><a href="#slag.loader">slag.loader</a></li><li><a href="#syslog.core">syslog.core</a></li><li><a href="#slag.utils">slag.utils</a></li><li><a href="#slag.web">slag.web</a></li></ul></div></td><td class="codes">&nbsp;</td></tr><tr><td class="docs"><div class="docs-header"><a class="anchor" href="#slag.core" name="slag.core"><h1 class="project-name">slag.core</h1><a class="toc-link" href="#toc">toc</a></a></div></td><td class="codes" /></tr><tr><td class="docs">
+</div><div class="dependencies"><h3>dependencies</h3><table><tr><td class="dep-name">org.clojure/clojure</td><td class="dotted"><hr /></td><td class="dep-version">1.5.1</td></tr><tr><td class="dep-name">cwk</td><td class="dotted"><hr /></td><td class="dep-version">0.1.3-SNAPSHOT</td></tr><tr><td class="dep-name">reval</td><td class="dotted"><hr /></td><td class="dep-version">0.1.0-SNAPSHOT</td></tr><tr><td class="dep-name">org.clojure/clojure-contrib</td><td class="dotted"><hr /></td><td class="dep-version">1.2.0</td></tr><tr><td class="dep-name">org.clojure/tools.namespace</td><td class="dotted"><hr /></td><td class="dep-version">0.2.4</td></tr><tr><td class="dep-name">org.syslog4j/syslog4j</td><td class="dotted"><hr /></td><td class="dep-version">0.9.30</td></tr><tr><td class="dep-name">com.sun.jna/jna</td><td class="dotted"><hr /></td><td class="dep-version">3.0.9</td></tr><tr><td class="dep-name">org.apache.directory.studio/org.apache.commons.pool</td><td class="dotted"><hr /></td><td class="dep-version">1.6</td></tr><tr><td class="dep-name">org.apache.directory.studio/org.apache.logging.log4j</td><td class="dotted"><hr /></td><td class="dep-version">1.2.17</td></tr></table></div></td><td class="codes" style="text-align: center; vertical-align: middle;color: #666;padding-right:20px"><br /><br /><br />(this space intentionally left almost blank)</td></tr><tr><td class="docs"><div class="toc"><a name="toc"><h3>namespaces</h3></a><ul><li><a href="#slag.core">slag.core</a></li><li><a href="#slag.helpers">slag.helpers</a></li><li><a href="#syslog.core">syslog.core</a></li><li><a href="#slag.utils">slag.utils</a></li><li><a href="#slag.web">slag.web</a></li></ul></div></td><td class="codes">&nbsp;</td></tr><tr><td class="docs"><div class="docs-header"><a class="anchor" href="#slag.core" name="slag.core"><h1 class="project-name">slag.core</h1><a class="toc-link" href="#toc">toc</a></a></div></td><td class="codes" /></tr><tr><td class="docs">
 </td><td class="codes"><pre class="brush: clojure">(ns slag.core
 	(:use [slag.utils]
-				[slag.web :only [start-service]])
+				[slag.web])
   (:gen-class))</pre></td></tr><tr><td class="docs"><p>Run web service</p>
 </td><td class="codes"><pre class="brush: clojure">(defn -main
   [&amp; args]
-  (start-service 8000))</pre></td></tr><tr><td class="spacer docs">&nbsp;</td><td class="codes" /></tr><tr><td class="docs"><div class="docs-header"><a class="anchor" href="#slag.helpers" name="slag.helpers"><h1 class="project-name">slag.helpers</h1><a class="toc-link" href="#toc">toc</a></a></div></td><td class="codes" /></tr><tr><td class="docs">
+  ())</pre></td></tr><tr><td class="spacer docs">&nbsp;</td><td class="codes" /></tr><tr><td class="docs"><div class="docs-header"><a class="anchor" href="#slag.helpers" name="slag.helpers"><h1 class="project-name">slag.helpers</h1><a class="toc-link" href="#toc">toc</a></a></div></td><td class="codes" /></tr><tr><td class="docs">
 </td><td class="codes"><pre class="brush: clojure">(ns slag.helpers)</pre></td></tr><tr><td class="docs">
 </td><td class="codes"><pre class="brush: clojure">(defn helper
   [x]
@@ -3044,103 +3044,7 @@ net.brehaut.ClojureTools = (function (SH) {
 </td><td class="codes"><pre class="brush: clojure">(defn check-existance
   [entity id]
   (println &quot;CHECK&quot; entity id)
-  (not (nil? (get [1 2 3 4 5] id))))</pre></td></tr><tr><td class="spacer docs">&nbsp;</td><td class="codes" /></tr><tr><td class="docs"><div class="docs-header"><a class="anchor" href="#slag.loader" name="slag.loader"><h1 class="project-name">slag.loader</h1><a class="toc-link" href="#toc">toc</a></a></div></td><td class="codes" /></tr><tr><td class="docs">
-</td><td class="codes"><pre class="brush: clojure">(ns slag.loader
-  (:import java.util.jar.JarFile)
-  (:gen-class))</pre></td></tr><tr><td class="docs"><p>List files of inner-jar
-  resources folder</p>
-</td><td class="codes"><pre class="brush: clojure">(defn list-jar
-  [jar-path inner-dir]
-  (if-let [jar (JarFile. jar-path)]
-    (let [inner-dir (if (and (not= &quot;&quot; inner-dir) (not= &quot;/&quot; (last inner-dir))) (str inner-dir &quot;/&quot;) inner-dir)
-          entries      (enumeration-seq (.entries jar))
-          names        (map (fn [x] (.getName x)) entries)
-          snames       (filter (fn [x] (= 0 (.indexOf x inner-dir))) names)
-          fsnames      (map #(subs % (count inner-dir)) snames)]
-      fsnames)))</pre></td></tr><tr><td class="docs"><p>Check if file
-  extension is in
-  one of the given</p>
-</td><td class="codes"><pre class="brush: clojure">(defn has-file-extension?
-  [file-name extensions]
-  (let [extension-pattern (clojure.string/join &quot;|&quot; extensions)
-        complete-pattern (str &quot;^.+\\.(&quot; extension-pattern &quot;)$&quot;)
-        extensions-reg-exp (re-pattern complete-pattern)]
-    (if (re-find extensions-reg-exp file-name) true false)))</pre></td></tr><tr><td class="docs"><p>Filter filenames
-  by it's extensions</p>
-</td><td class="codes"><pre class="brush: clojure">(defn filter-on-extensions
-  [files extensions]
-  (filter #(has-file-extension? % extensions) files))</pre></td></tr><tr><td class="docs"><p>Utility function
-  to get the name of jar
-  in which this function
-  is invoked</p>
-</td><td class="codes"><pre class="brush: clojure">(defn locate-jar
-  [&amp; [ns]]
-  (-&gt; (class (or ns *ns*))
-      .getProtectionDomain .getCodeSource .getLocation .getPath))</pre></td></tr><tr><td class="docs"><p>Get list of jar
-  resource files by
-  given path</p>
-</td><td class="codes"><pre class="brush: clojure">(defn list-jar-resources-dir
-  [jar path]
-  (list-jar jar path))</pre></td></tr><tr><td class="docs"><p>Get absolute resources
-  path for given inner-resource
-  folder</p>
-</td><td class="codes"><pre class="brush: clojure">(defn get-local-resources-path
-  [path]
-  (clojure.java.io/file (clojure.java.io/resource path)))</pre></td></tr><tr><td class="docs"><p>Get list of local
-  resource folder filnames</p>
-</td><td class="codes"><pre class="brush: clojure">(defn list-local-resources-dir
-  [path]
-  (-&gt;&gt; (file-seq (get-local-resources-path path))
-       (filter #(.isFile %))
-       (map #(.getName %))))</pre></td></tr><tr><td class="docs">
-</td><td class="codes"><pre class="brush: clojure">(defn load-jar-resource [jar-path inner-path]
-  &quot;Get jar by path
-  and read it inner-resource
-  file contents&quot;
-  (if-let [jar   (JarFile. jar-path)]
-    (if-let [entry (.getJarEntry jar inner-path)]
-      (slurp (.getInputStream jar entry)))))</pre></td></tr><tr><td class="docs"><p>Concatenate file path
-  with OS-based file path
-  separator</p>
-</td><td class="codes"><pre class="brush: clojure">(defn file-path
-  [&amp; parts]
-  (apply clojure.string/join java.io.File/separator parts))</pre></td></tr><tr><td class="docs"><p>Initiate jar inner-resources
-  files content reading and
-  evaluation</p>
-</td><td class="codes"><pre class="brush: clojure">(defn load-jar-resources
-  [jar-path inner-path files]
-  (doseq [file files]
-    (eval (read-string (load-jar-resource jar-path (file-path [inner-path file]))))))</pre></td></tr><tr><td class="docs"><p>Initiate loading and
-  evaluation of local
-  inner-resource directory files</p>
-</td><td class="codes"><pre class="brush: clojure">(defn load-local-resources
-  [path files]
-  (doseq [file files]
-    (load-file (file-path [(.getPath (get-local-resources-path path)) file]))))</pre></td></tr><tr><td class="docs"><p>Evaluates source code from files
-  stored in separated inner-resource folder
-  in concrete namespace after it's configuration
-  Note: doesn't work with clojure namespace</p>
-</td><td class="codes"><pre class="brush: clojure">(defmacro reval
-  [ns path &amp; initer]
-  `(do
-     (if (not (= clojure.lang.Symbol (class ~ns)))
-       (throw (Exception. (str &quot;reval: first arg must be a clojure.lang.Symbol, &quot; (class ~ns) &quot; given&quot;))))
-     (try
-       (def jar-path# (locate-jar ~ns))
-       (catch Exception e# (println (.getMessage e# ))))
-     (def jar# (and (bound? #'jar-path#)
-                    (nil? (re-find #&quot;clojure\-[\d]+&quot; jar-path#))))
-     (def filenames#
-       (if jar#
-         (list-jar-resources-dir jar-path# ~path)
-         (list-local-resources-dir ~path)))
-     (binding [*ns* *ns*]
-       (in-ns ~ns)
-       (refer-clojure)
-       ~@initer
-       (if jar#
-         (load-jar-resources jar-path# ~path filenames#)
-         (load-local-resources ~path filenames#)))))</pre></td></tr><tr><td class="spacer docs">&nbsp;</td><td class="codes" /></tr><tr><td class="docs"><div class="docs-header"><a class="anchor" href="#syslog.core" name="syslog.core"><h1 class="project-name">syslog.core</h1><a class="toc-link" href="#toc">toc</a></a></div></td><td class="codes" /></tr><tr><td class="docs">
+  (not (nil? (get [1 2 3 4 5] id))))</pre></td></tr><tr><td class="spacer docs">&nbsp;</td><td class="codes" /></tr><tr><td class="docs"><div class="docs-header"><a class="anchor" href="#syslog.core" name="syslog.core"><h1 class="project-name">syslog.core</h1><a class="toc-link" href="#toc">toc</a></a></div></td><td class="codes" /></tr><tr><td class="docs">
 </td><td class="codes"><pre class="brush: clojure">(ns syslog.core
   (:use [utils])
   (:import [java.io PrintStream ByteArrayOutputStream]
@@ -3233,146 +3137,19 @@ net.brehaut.ClojureTools = (function (SH) {
   `(loop []
      (when ~test
        ~@body
-       (recur))))</pre></td></tr><tr><td class="spacer docs">&nbsp;</td><td class="codes" /></tr><tr><td class="docs"><div class="docs-header"><a class="anchor" href="#slag.web" name="slag.web"><h1 class="project-name">slag.web</h1><a class="toc-link" href="#toc">toc</a></a></div></td><td class="codes" /></tr><tr><td class="docs"><p>Slag.web builds rest api to communicate with application (web interface etc.)</p>
-
-<p>It uses:</p>
-
-<ul>
-<li><a href="https://github.com/ring-clojure/ring">ring</a> with jetty server</li>
-<li><a href="https://github.com/weavejester/compojure">compojure</a></li>
-<li><a href="http://clojure-liberator.github.io/liberator">liberator</a></li>
-</ul>
+       (recur))))</pre></td></tr><tr><td class="spacer docs">&nbsp;</td><td class="codes" /></tr><tr><td class="docs"><div class="docs-header"><a class="anchor" href="#slag.web" name="slag.web"><h1 class="project-name">slag.web</h1><a class="toc-link" href="#toc">toc</a></a></div></td><td class="codes" /></tr><tr><td class="docs">
 </td><td class="codes"><pre class="brush: clojure">(ns slag.web
   (:gen-class)
-  (:use slag.utils
-        slag.loader)
-  (:require ring.adapter.jetty
-            ring.middleware.params
-            compojure.core
-            liberator.core
-            liberator.dev))</pre></td></tr><tr><td class="docs"><p>stores compojure routes,
-created by res-handler
-to involve them in slag.web/api</p>
-</td><td class="codes"><pre class="brush: clojure">(def routes (ref {}))</pre></td></tr><tr><td class="docs"><p>Returns alpha-numeric name of the function</p>
-
-<pre><code>(fname string?)
-; string
-</code></pre>
-</td><td class="codes"><pre class="brush: clojure">(defn fname
-  [f]
-  (subs (first (re-find #&quot;(\$)[A-Za-z0-9]*&quot; (.toString f))) 1))</pre></td></tr><tr><td class="docs"><p>Throws an exception if given variable didn't passed type checks.</p>
-
-<pre><code>(ensure-argument "seventh" #(string? %))
-; nil
-
-(ensure-argument 1 string? non-string-arg)
-; IllegalArgumentException Please, pass string as first argument.
-
-(ensure-argument 6 #(or (seq? %) (symbol? %) 123 "sequence or symbol")
-; IllegalArgumentException Please, pass sequence or symbol as sixth argument.
-</code></pre>
-</td><td class="codes"><pre class="brush: clojure">(defn ensure-argument
-  [pos checker-function given-var &amp; expected]
-  (let [stance [&quot;first&quot; &quot;second&quot; &quot;third&quot; &quot;forth&quot; &quot;fifth&quot; &quot;sixth&quot;]]
-    (if (not (checker-function given-var))
-      (throw (IllegalArgumentException. (str &quot;Please, pass &quot; (or (first expected) (fname checker-function)) &quot; as &quot; (or (get stance pos) pos) &quot; argument.&quot;))))))</pre></td></tr><tr><td class="docs"><p>Creates liberator resource, create compojure route,
-  bind resource to it and merge it to routes.</p>
-
-<pre><code>(res-handler "/posts/:id" [id] {
-  :handle-ok "Posts!"})
-
-; @slag.web/routes
-; {:posts/id #&lt;core$if_method$fn__748 compojure.core$if_method$fn__748@7f08eeac&gt;}
-</code></pre>
-</td><td class="codes"><pre class="brush: clojure">(defmacro res-handler
-  [route args &amp; kvs]
-  `(dosync
-    (ref-set slag.web/routes (merge
-                              @slag.web/routes
-                              {~(keyword (clojure.string/replace route #&quot;(/:)([\w]*)&quot; &quot;/$2&quot;))
-                               (compojure.core/ANY (str &quot;/&quot; ~route) ~args (fn [request#] (liberator.core/run-resource request# ~@kvs)))}))))</pre></td></tr><tr><td class="docs"><p>Creates resources by res-handler.
-  It merges common resource handlers and route with appropriate options of each resource.</p>
-
-<pre><code>(defres "posts"
-  {:allowed-methods [:get :put :post]}
-  "/" [] {
-    :handle-ok "Posts"
-  }
-  "/:id" [id] {
-    :handle-ok (=&gt; ctx
-                  (str "Post with id " id))
-  })
-
-; @slag.web/routes
-; {:posts/id #&lt;core$if_method$fn__748 compojure.core$if_method$fn__748@24e998bb&gt;,
-; :posts #&lt;core$if_method$fn__748 compojure.core$if_method$fn__748@642a2feb&gt;}
-</code></pre>
-</td><td class="codes"><pre class="brush: clojure">(defmacro defres
-  [&amp; form]
-  (let [[root common route args res &amp; nxt] (vec form)
-        factory `(res-handler ~(str root route) ~args (merge ~common ~res))]
-    (ensure-argument 1 string? root)
-    (cond (nil? nxt) factory
-          :else `(do
-                   (defres ~root ~common ~@nxt)
-                   ~factory))))</pre></td></tr><tr><td class="docs"><p>Creates liberator handler, binds first argument to request context and allows to create bindings to request context members.</p>
-
-<pre><code>...
-:handle-ok (=&gt; ctx :representation :media-type mt :request :query-params "name" name
-              (str "Greetings, " name ". Request media-type is " mt))
-
-; curl http://......?name=Rick
-; Greetings, Rick. Request media-type is text/plain
-</code></pre>
-</td><td class="codes"><pre class="brush: clojure">(defmacro =&gt;
-  [ctx &amp; kvs]
-  (let [bindings (vec (map-indexed #(if (even? %1) (vec %2) (first %2)) (partition-by #(not (symbol? %)) (remove seq? (pop (vec kvs))))))
-        vars (vec (keep-indexed #(if (odd? %1) %2) bindings))
-        values (vec (keep-indexed #(if (even? %1) %2) bindings))]
-    (if (and (&gt; (count values) 0) (= (count values) (count vars)))
-      `(fn [$#] (apply (fn [~ctx ~@vars] ~(last kvs)) (apply conj [$#] (vec (map #(get-in $# %) ~values)))))
-      `(fn [$#] (apply (fn [~ctx] ~(last kvs)) [$#])))))</pre></td></tr><tr><td class="docs">
-</td><td class="codes"><pre class="brush: clojure">(def common-options {
-                     :available-media-types [&quot;text/plain&quot;]
-                     :allowed-methods [:get :put :post]
-                     })</pre></td></tr><tr><td class="docs">
-</td><td class="codes"><pre class="brush: clojure">(defres &quot;servers&quot;
-
-  (merge common-options {:available-media-types [&quot;text/plain&quot; &quot;text/html&quot;]})
-
-  &quot;/:id&quot; [id] {
-               :handle-ok (=&gt; r
-                              (format &quot;SERVER WITH ID %s&quot; id))
-               }
-
-  &quot;&quot; [] {
-
-         :exists? (=&gt; ctx :request :query-params &quot;choice&quot; c
-                      (if (not (nil? (find {&quot;1&quot; &quot;apple&quot; &quot;2&quot; &quot;orange&quot;} c)))
-                        {:choice c}))
-
-
-         :handle-not-found (=&gt; r :choice c
-                               (format &quot;&lt;html&gt;There is no value for the option &amp;quot;%s&amp;quot;&quot;
-                                       c))
-
-         :handle-ok (=&gt; ctx :choice c :representation :media-type mt
-                        (condp = mt
-                          &quot;text/html&quot; (format &quot;&lt;html&gt;&lt;a href='#'&gt;Your choice: &amp;quot;%s&amp;quot;&lt;/a&gt;.&quot; c)
-                          &quot;text/plain&quot; (format &quot;Your choice: \&quot;%s\&quot;.\n&quot; c))
-                        )
-
-         :handle-not-acceptable &quot;Uh, Oh, I cannot speak those languages!&quot;
-
-         }
-
-  )</pre></td></tr><tr><td class="docs">
-</td><td class="codes"><pre class="brush: clojure">(reval 'slag.resources &quot;api&quot; (use 'slag.web 'slag.helpers))</pre></td></tr><tr><td class="docs">
-</td><td class="codes"><pre class="brush: clojure">(def api (apply compojure.core/routes 'api (vals @routes)))</pre></td></tr><tr><td class="docs">
-</td><td class="codes"><pre class="brush: clojure">(def handler (-&gt; api
-                 ring.middleware.params/wrap-params
-                 (liberator.dev/wrap-trace :header :ui)))</pre></td></tr><tr><td class="docs">
-</td><td class="codes"><pre class="brush: clojure">(defn start-service
-  [port]
-  (ring.adapter.jetty/run-jetty handler {:port port :join? false}))</pre></td></tr><tr><td class="spacer docs">&nbsp;</td><td class="codes" /></tr></table><div class="footer">Generated by <a href="https://github.com/fogus/marginalia">Marginalia</a>.&nbsp;&nbsp;Syntax highlighting provided by Alex Gorbatchev's <a href="http://alexgorbatchev.com/SyntaxHighlighter/">SyntaxHighlighter</a></div><script type="text/javascript">SyntaxHighlighter.defaults['gutter'] = false;
+  (:use cwk.core
+        reval.core)
+  (:require ring.middleware.params
+            liberator.dev))</pre></td></tr><tr><td class="docs">
+</td><td class="codes"><pre class="brush: clojure">(def options {
+              :available-media-types [&quot;text/plain&quot;]
+              :allowed-methods [:get :put :post]
+              })</pre></td></tr><tr><td class="docs">
+</td><td class="codes"><pre class="brush: clojure">(reval 'slag.resources &quot;api&quot; (use 'cwk.core 'slag.web))</pre></td></tr><tr><td class="docs">
+</td><td class="codes"><pre class="brush: clojure">(def handler (wrapped-handler -&gt;
+                ring.middleware.params/wrap-params
+                (liberator.dev/wrap-trace :header :ui)))</pre></td></tr><tr><td class="spacer docs">&nbsp;</td><td class="codes" /></tr></table><div class="footer">Generated by <a href="https://github.com/fogus/marginalia">Marginalia</a>.&nbsp;&nbsp;Syntax highlighting provided by Alex Gorbatchev's <a href="http://alexgorbatchev.com/SyntaxHighlighter/">SyntaxHighlighter</a></div><script type="text/javascript">SyntaxHighlighter.defaults['gutter'] = false;
        SyntaxHighlighter.all()</script></body></html>
