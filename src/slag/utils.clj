@@ -1,6 +1,5 @@
 (ns slag.utils
   (:use
-   [clojure.tools.namespace.find :only [find-namespaces-in-dir]]
    [clojure.string :only [join split]])
   (:require
    [clojure.string :refer [trim]]
@@ -66,4 +65,4 @@
 
 (defmacro def-by-keyword
   [kwd value]
-  `(def ~(symbol (name kwd)) ~value))
+  `(def ~(symbol (clojure.core/name kwd)) ~value))

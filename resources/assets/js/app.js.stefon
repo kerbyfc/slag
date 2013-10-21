@@ -1,4 +1,36 @@
 [
-  "./test.js"
-  "./an.js.coffee"
+  "./vendor/jquery/jquery-1.10.0.min.js"
+  "./vendor/jquery/jquery-ui-1.10.3.custom.min.js"
+  "./vendor/jquery/jquery.cookie.js"
+  "./vendor/bootstrap/bootstrap.min.js"
+  "./vendor/bootstrap/tags-manager.js"
+  "./vendor/underscore/underscore.min.js"
+  "./vendor/backbone/backbone.js"
+  "./vendor/backbone/backbone-validation.js"
+  "./vendor/jacket.js"
+  "./vendor/human.js"
+
+  "./app/slag.js.coffee"
+  "./app/utils.js.coffee"
+  "./app/mixins.js.coffee"
+  "./app/navigator.js.coffee"
+  "./app/notifier.js.coffee"
+  "./app/presenter.js.coffee"
+  "./app/storage.js.coffee"
+  "./app/initer.js.coffee"
+
+  "./base/base_model.js.coffee"
+  "./base/base_collection.js.coffee"
+  "./base/base_layout.js.coffee"
+  "./base/base_view.js.coffee"
+  "./base/base_widget.js.coffee"
+  "./base/base_input.js.coffee"
+
+  "./models"
+  "./collections/"
+  "./layouts/"
+  "./views/"
+  "./inputs/"
+  "./widgets/"
+
 ]

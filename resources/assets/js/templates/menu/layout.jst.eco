@@ -1,0 +1,8 @@
+<li class="dropdown <%= @selector %>">
+  <a href="#" class="layout-menu-item dropdown-toggle" data-toggle="dropdown">
+    <%- if @icon then "<i class=\"glyphicon glyphicon-#{@icon}\"></i>" %>
+    <%= @title %>
+    <b class="caret"></b>
+  </a>
+  <ul class="dropdown-menu"></ul>
+</li>

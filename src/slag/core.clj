@@ -28,6 +28,7 @@
 (defn -main
   "Run web service"
   [& args]
-  (check-configuration))
+  (check-configuration)
+  (start-service {:port 8000}))
 
 

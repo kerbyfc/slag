@@ -10,8 +10,8 @@
                  [cwk "0.1.3-SNAPSHOT"]
                  [reval "0.1.0-SNAPSHOT"]
 
-
 								 ; UTILS
+                 [clojurewerkz/quartzite "1.1.0"]
                  [com.github.ragnard/hamelito "0.2.1"]
                  [circleci/stefon "0.5.0-SNAPSHOT"]
 

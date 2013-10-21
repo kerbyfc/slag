@@ -1,0 +1,4 @@
+ <li class="<%= @className %><%- if @active then " active" %>">
+  <%- if @icon then "<i class=\"glyphicon glyphicon-#{@icon}\"></i>" %>
+  <%- if @url then "<a href=\"#{@url}\">#{@title}</a>" else @title %>
+</li>

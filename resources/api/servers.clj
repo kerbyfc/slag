@@ -1,6 +1,6 @@
 (defresources "servers"
 
-  (merge options {:available-media-types ["text/plain" "text/html"]})
+  (merge web-api-conf {:available-media-types ["text/plain" "text/html"]})
 
   "/:id" [id] {
                :handle-ok (=> r
