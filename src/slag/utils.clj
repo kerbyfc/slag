@@ -63,3 +63,7 @@
      (when ~test
        ~@body
        (recur))))
+
+(defmacro def-by-keyword
+  [kwd value]
+  `(def ~(symbol (name kwd)) ~value))

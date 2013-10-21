@@ -10,9 +10,14 @@
                  [cwk "0.1.3-SNAPSHOT"]
                  [reval "0.1.0-SNAPSHOT"]
 
+
 								 ; UTILS
+                 [com.github.ragnard/hamelito "0.2.1"]
+                 [circleci/stefon "0.5.0-SNAPSHOT"]
+
 								 [org.clojure/clojure-contrib "1.2.0"]
                  [org.clojure/tools.namespace "0.2.4"]
+                 [cheshire "5.2.0"]
 
 
 								 ; WEB STACK
