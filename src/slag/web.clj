@@ -8,6 +8,7 @@
             [stefon.core :as stefon]
             [com.github.ragnard.hamelito.hiccup :as haml]))
 
+
 (def web-api-conf {
               :service-available? (find-ns 'slag.config)
               :available-media-types ["text/plain"]

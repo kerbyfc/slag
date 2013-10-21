@@ -1,8 +1,7 @@
 (ns slag.core
 	(:use [slag.utils]
 				[slag.web])
-  (:require [cheshire.core :refer :all])
-  (:gen-class))
+  (:require [cheshire.core :refer :all]))
 
 (defn check-configuration
   "Checks if configuration file exists"
@@ -23,12 +22,11 @@
         (catch java.io.FileNotFoundException e
           false)))))
 
-(check-configuration)
-
 (defn -main
   "Run web service"
   [& args]
   (check-configuration)
-  (start-service {:port 8000}))
+  ;(start-service {:port 8000})
+  )
 
 

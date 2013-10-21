@@ -1,6 +1,6 @@
 
-(ns syslog.core
-  (:use [utils])
+(ns slag.syslog
+  (:use slag.utils)
   (:import [java.io PrintStream ByteArrayOutputStream]
 
            [org.productivity.java.syslog4j.util SyslogUtility]
@@ -23,7 +23,7 @@
   []
   (def baos (ByteArrayOutputStream.))
   (def ps (PrintStream. baos))
-  (Handler ps))
+  (Handler. ps))
 
 (def handler (create-handler))
 
@@ -49,9 +49,6 @@
 
   server)
 
-(defn -main [& args] ())
-
 (def server (create-server {:protocol "ssl"
                             :structured true
                             :port 4444}))
-(.run server)
