@@ -1,6 +1,6 @@
 html, body {
   height: 100%;
-  background: url('/images/bg.png');
+  background: url('/images/bg.jpg');
 }
 .float-right {
   float: right !important;
@@ -33,8 +33,6 @@ html, body {
 .width-100 {
   width: 100%;
 }
-
-
 
 .rowfix {
   margin-left: 0;

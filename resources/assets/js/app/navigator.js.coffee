@@ -35,11 +35,18 @@ Slag.register class Navigator extends Backbone.Router
         @register entity, item  for name, item of Slag["#{app.utils.capitalize entity}s"]
 
       @on 'route', @updateMenu
-      @on 'route', @scrollTop
+
+      @handleClicks()
 
       Backbone.history.start()
 
     @
+
+  handleClicks: ->
+    @$el.on 'click', (e) ->
+      unless window.isUp
+        e.preventDefault()
+        false
 
   ###*
    * зарегистрировать лейаут или вьюху
@@ -71,11 +78,13 @@ Slag.register class Navigator extends Backbone.Router
     else
 
       # вью имеет 1 роут
-      if item::route
+      if item::route isnt undefined
         route = item::route
 
       # либо item::route либо route из параметров
       if route?
+
+        app.log "HERE", route, item.name
 
         data.url = "#" + @removeOptionalParts route
 
@@ -84,15 +93,17 @@ Slag.register class Navigator extends Backbone.Router
         # теперь забираем роут в виде регулярки из Backbone
         data.route = _.first(Backbone.history.handlers).route
 
-        el = $( Slag.template 'menu/view', data )
+        if item::menu_title and item::hide_menu_item is undefined
 
-        # если вью привязана к лейауту -> в менюху лейаута
-        if item::layout
-          @$el.find(".#{item::layout} > ul").append el
+          el = $( Slag.template 'menu/view', data )
 
-        # иначе в бар
-        else
-          @$el.append el
+          # если вью привязана к лейауту -> в менюху лейаута
+          if item::layout
+            @$el.find(".#{item::layout} > ul").append el
+
+          # иначе в бар
+          else
+            @$el.append el
 
       # если вью имеет несколько роутов
       # регим их по очереди, передаваю данному методу роут и тайтл
@@ -136,10 +147,6 @@ Slag.register class Navigator extends Backbone.Router
 
   extractStaticArgs: (route) ->
     (route.match(/(\/)+([\w\_]+)/g) || []).join().substr(1).split('/')
-
-  scrollTop: =>
-    $("html, body").animate scrollTop: 0
-    , 0
 
   ###*
    * Обновить активную вкладку при навигации

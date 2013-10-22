@@ -1,0 +1,9 @@
+%li{ :class => "dropdown#{@selector}"}
+  %a{ :href => "#",
+      :class => "layout-menu-item dropdown-toggle",
+      :data-toggle => "dropdown"}
+    - if @icon
+      %i{ :class => "glyphicon glyphicon-#{@icon}" }
+    = @title
+    %b.caret
+  %ul.dropdown-menu

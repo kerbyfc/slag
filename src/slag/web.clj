@@ -15,7 +15,7 @@
               :allowed-methods [:get :put :post]
               })
 
-(def stefon-conf
+(def stefon-setup
   {
    :asset-roots ["resources/assets"]
    :serving-root "public"
@@ -26,20 +26,24 @@
 
 (defn embed-assets
   [template assets-type]
-  (clojure.string/replace template (re-pattern (str "_" assets-type "_")) (stefon/link-to-asset (str assets-type "/app." assets-type ".stefon") stefon-conf)))
+  (clojure.string/replace template (re-pattern (str "_" assets-type "_")) (stefon/link-to-asset (str assets-type "/app." assets-type ".stefon") stefon-setup)))
 
-(def template
-  (-> (haml/html (slurp (clojure.java.io/resource "application.haml")))
+(def application-template
+  (-> (haml/html (slurp (clojure.java.io/resource "app.haml")))
       (embed-assets "css")
-      (embed-assets "js")))
+      (embed-assets "js")
+      (clojure.string/replace #"_up_" (str (not (nil? (find-ns 'slag.config)))))))
 
 (reval 'slag.resources "api" (use 'cwk.core 'slag.web))
 
 (def handler (wrapped-handler ->
                               ring.middleware.params/wrap-params
-                              (stefon/asset-pipeline stefon-conf)
+                              (stefon/asset-pipeline stefon-setup)
                               (liberator.dev/wrap-trace :header :ui)))
 
 (defn start-service
   [opts]
   (cwk.core/run handler opts))
+
+
+cwk.core/routes-map

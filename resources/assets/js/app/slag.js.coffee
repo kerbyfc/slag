@@ -58,6 +58,14 @@ class Slag extends Backbone.Events
   ###
   @lastLogGroup = ""
 
+  @tplCompiler = new (require('./haml-coffee'))
+        escapeHtml: true
+        escapeAttributes: true
+        cleanValue: true
+        uglify: false
+        extendScope: true
+        format: "html5"
+
   ###*
    * Вывод в консоль отладочной информации о вызове метода
    * в группе, имеющей название Class.method.
@@ -237,14 +245,29 @@ class Slag extends Backbone.Events
    * @static
   ###
   @template = J 'Slag.template', (template, values...) ->
-    return ""
-    tmp = JST["#{Slag.templates}/#{template}"]
-    if tmp is undefined
+
+    if (Slag.JST ?= {})[template] is undefined
+
+      res = $.ajax
+        url: "/templates/#{template}",
+        async: false
+
+      if res.status is 500
+        throw new Error "Template #{template} is broken"
+
+      Slag.tplCompiler.parse(res.responseText)
+      Slag.JST[template] = new Function(CoffeeScript.compile(Slag.tplCompiler.precompile(), {bare: true}))
+
+    tpl = Slag.JST[template]
+
+    if tpl is undefined
       throw new Error "Template #{template} wasn't found"
-    if values.length
-      tmp _.extend(values...)
+
+    if values.length and values isnt undefined
+      tpl.call _.extend(values...)
     else
-      tmp
+      (scope) ->
+        tpl.call scope
 
   ###*
    * Регулярка сущностей приложения

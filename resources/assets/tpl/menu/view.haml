@@ -1,0 +1,5 @@
+%li{ :class => @selector}
+  %a.view-menu-item{ :href => @url }
+    - if @icon
+      %i{ :class => "glyphicon glyphicon-#{@icon}"}
+    = @title

@@ -55,8 +55,10 @@ Slag.register class Initer
    * @method lookupUser
   ###
   checkEnvironment: ->
-     # TODO
-     true
+     unless window.isUp
+      location.href = "#setup"
+      $('.navbar-collapse').css
+          opacity: 0.2
 
   ###*
    * Настройка токена безопасности

@@ -1,0 +1,11 @@
+<tr>
+  <td>
+    <%- @get 'text_ru' %>
+  </td>
+  <td>
+    <%- @get 'text_en' %>
+  </td>
+  <td>
+    Buttons
+  </td>
+</tr>

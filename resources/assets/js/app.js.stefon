@@ -7,6 +7,8 @@
   "./vendor/underscore/underscore.min.js"
   "./vendor/backbone/backbone.js"
   "./vendor/backbone/backbone-validation.js"
+  "./vendor/coffeescript.min.js"
+  "./vendor/hamlcoffee.min.js"
   "./vendor/jacket.js"
   "./vendor/human.js"
 

@@ -1,0 +1,20 @@
+<tr>
+  <td title="Плейлист №<%- @id %>">
+    <a href="#playlists/edit/<%- @id %>"><%- @title() %></a>
+  </td>
+  <td>
+    <%- @contentsCount() %>/<%- @contentsCount() %>
+  </td>
+  <td></td>
+  <td width="75px">
+    <span class="glyphicon glyphicon-time"></span> <%- @humanizeDuration() %>
+  </td>
+  <td>
+    <%- @getContentsPreview() %>
+  </td>
+  <td width="135px">
+    <button type="button" class="btn btn-info">
+      <span class="glyphicon glyphicon-share"></span> Клонировать
+    </button>
+  </td>
+</tr>

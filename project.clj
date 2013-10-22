@@ -7,7 +7,7 @@
 
                  [org.clojure/clojure "1.5.1"]
 
-                 [cwk "0.1.3-SNAPSHOT"]
+                 [cwk "0.1.4-SNAPSHOT"]
                  [reval "0.1.0-SNAPSHOT"]
 
 								 ; UTILS

@@ -6,4 +6,5 @@ Slag.register class PresentationsView extends Slag.View
   route: 'presentations(/:id)'
 
   open: ->
+    app.navigator.title "Список презентаций"
     console.log "OPEN", arguments

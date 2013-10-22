@@ -1,0 +1,8 @@
+%li{ :class => "#{@className} #{if @active then "active"}" }
+  - if @icon
+    %i{ :class => "glyphicon glyphicon-#{@icon}"
+  - if @url
+    %a{ :href => "#{@url}"}
+      = @title
+  - else
+    = @title

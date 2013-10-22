@@ -1,0 +1,3 @@
+<div class="content-history col-md-3 <%- @badge %> white">
+  <span class="glyphicon glyphicon-<%= @icon %>"> <%= @title %></span>
+<div>

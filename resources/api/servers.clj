@@ -1,4 +1,4 @@
-(defresources "servers"
+(defresources "/servers"
 
   (merge web-api-conf {:available-media-types ["text/plain" "text/html"]})
 
