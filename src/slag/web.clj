@@ -2,16 +2,18 @@
   (:gen-class)
   (:use cwk.core
         reval.core
+        slag.db
         slag.utils)
   (:require ring.middleware.params
             liberator.dev
             [stefon.core :as stefon]
+            [cheshire.core :refer :all]
             [com.github.ragnard.hamelito.hiccup :as haml]))
 
 
-(def web-api-conf {
+(def web-api {
               :service-available? (find-ns 'slag.config)
-              :available-media-types ["text/plain"]
+              :available-media-types ["application/json"]
               :allowed-methods [:get :put :post]
               })
 
@@ -24,17 +26,34 @@
    :precompiles ["./assets/app.js.stefon"]
    })
 
-(defn embed-assets
-  [template assets-type]
-  (clojure.string/replace template (re-pattern (str "_" assets-type "_")) (stefon/link-to-asset (str assets-type "/app." assets-type ".stefon") stefon-setup)))
+(defn html
+  [temp]
+  (haml/html temp))
 
-(def application-template
-  (-> (haml/html (slurp (clojure.java.io/resource "app.haml")))
-      (embed-assets "css")
-      (embed-assets "js")
-      (clojure.string/replace #"_up_" (str (not (nil? (find-ns 'slag.config)))))))
+(defn alink
+  [asset]
+  (stefon/link-to-asset asset stefon-setup))
 
-(reval 'slag.resources "api" (use 'cwk.core 'slag.web))
+(defn usr-root
+  []
+  (reval.core/locate-user-root))
+
+(defn app-root
+  []
+  (let [root (reval.core/locate-application-root 'slag.web)]
+    (if (reval.core/jar? root)
+      (reval.core/location root)
+      root)))
+
+(defn embed
+  [t k v]
+  (clojure.string/replace t (re-pattern (name k)) v))
+
+(defn get-available-dbs
+  []
+  (generate-string slag.db/dbs))
+
+(reval 'slag.web "api" (use 'cwk.core 'slag.web))
 
 (def handler (wrapped-handler ->
                               ring.middleware.params/wrap-params
@@ -44,6 +63,3 @@
 (defn start-service
   [opts]
   (cwk.core/run handler opts))
-
-
-cwk.core/routes-map

@@ -7,7 +7,7 @@ Slag.register class IndexView extends Slag.View
   route: ""
 
   open: ->
-    app.navigator.title "Состояние системы", "dashboard"
+    app.navigator.title "Панель состояния", "dashboard"
 
 
 

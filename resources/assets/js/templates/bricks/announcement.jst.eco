@@ -1,3 +1,0 @@
-<div class="content-row">
-  <input type="checkbox" name="attrs.context" <%- if @get('attrs.context').toString() is 'true' then 'checked'%> /> Контектстный тип
-</div>

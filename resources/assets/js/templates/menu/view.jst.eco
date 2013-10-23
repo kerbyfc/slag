@@ -1,6 +1,0 @@
-<li class="<%= @selector %>">
-  <a href="<%= @url %>" class="view-menu-item">
-    <%- if @icon then "<i class=\"glyphicon glyphicon-#{@icon}\"></i>" %>
-    <%= @title %>
-  </a>
-</li>

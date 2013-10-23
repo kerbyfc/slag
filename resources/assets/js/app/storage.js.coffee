@@ -229,4 +229,7 @@ Slag.register class Storage
       @get args...
 
 
+ Slag.Collections ?= {}
+
+
 

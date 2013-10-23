@@ -44,9 +44,18 @@ Slag.register class Navigator extends Backbone.Router
 
   handleClicks: ->
     @$el.on 'click', (e) ->
-      unless window.isUp
+      unless app.isUp
         e.preventDefault()
         false
+    unless app.isUp
+      @disable()
+
+  disable: ->
+    $('.navbar-collapse').css
+      opacity: 0.2
+
+  enable: ->
+    opacity: 1
 
   ###*
    * зарегистрировать лейаут или вьюху

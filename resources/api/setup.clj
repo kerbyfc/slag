@@ -1,9 +1,15 @@
-(defresources "setup"
+(defres "/setup" []
 
-  (merge web-api-conf {:service-available? true})
+  {
+   :exists? (=> ctx
+                (not (nil? (find-ns 'slag.config))))
 
-  "/1" [] {
-           :handle-ok "STEP 1"
-           }
+   :post! (=> ctx
+              (println ctx))
+
+   :handle-ok "OK"
+
+   }
+
 
   )

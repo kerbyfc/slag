@@ -1,1 +1,0 @@
-<label class="glyphicon glyphicon-<%- @icon %>"></label> <%- @title %>

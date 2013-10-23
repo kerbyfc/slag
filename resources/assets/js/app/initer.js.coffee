@@ -16,7 +16,7 @@ Slag.register class Initer
   ###*
    * @type {App}
   ###
-  constructor: ->
+  constructor: (@isUp) ->
     @checkEnvironment()
     @setupToken()
     @regModules()
@@ -55,10 +55,8 @@ Slag.register class Initer
    * @method lookupUser
   ###
   checkEnvironment: ->
-     unless window.isUp
+     unless @isUp
       location.href = "#setup"
-      $('.navbar-collapse').css
-          opacity: 0.2
 
   ###*
    * Настройка токена безопасности
@@ -89,6 +87,6 @@ Slag.register class Initer
     console.log arguments...
 
 $ ->
-  app = window.app = new Slag.Initer
+  app = window.app = new Slag.Initer window.isUp
 
 

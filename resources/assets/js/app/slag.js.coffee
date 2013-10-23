@@ -18,7 +18,7 @@ class Slag extends Backbone.Events
    * @type {String}
    * @static
   ###
-  @api = '/api/frontend/v2/'
+  @api = '/api/'
 
   ###*
    * Путь к шаблонам eco

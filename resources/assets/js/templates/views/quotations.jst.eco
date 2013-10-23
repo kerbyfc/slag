@@ -1,3 +1,0 @@
-<table class="<%= @type %>-quotations-collection-widget" width="100%">
-
-</table>

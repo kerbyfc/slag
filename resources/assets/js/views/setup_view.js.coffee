@@ -1,4 +1,4 @@
-Slag.register class IndexView extends Slag.View
+Slag.register class SetupView extends Slag.View
 
   audit: true
 
@@ -6,8 +6,18 @@ Slag.register class IndexView extends Slag.View
 
   route: "setup"
 
+  events:
+    'submit .form': @submit
+
   open: ->
-    app.navigator.title "Настройка системы", "cog"
+    app.navigator.title "Настройка сервера", "cog"
+    @render()
+    @dbs = new Slag.Inputs.DbInput '.database-selector'
+
+  submit: ->
+    true
+
+
 
 
 

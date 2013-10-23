@@ -33,7 +33,6 @@ html, body {
 .width-100 {
   width: 100%;
 }
-
 .rowfix {
   margin-left: 0;
 }
@@ -79,6 +78,15 @@ a {
 
 .navbar-inner {
   padding: 0 !important;
+}
+
+.navbar-brand {
+  position: absolute;
+  z-index: 10000;
+}
+
+.navigator {
+  margin-left: 45px;
 }
 
 

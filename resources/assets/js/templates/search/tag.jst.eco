@@ -1,3 +1,0 @@
-<span class="m_count"></span>
-<i class="glyphicon glyphicon-<%= app.navigator.current.icon %>"></i>
-<a class="scrumb-id-<%= @id %>" data-id="<%= @id %>" href="#<%= @url %>"><%= @filter %></a>
