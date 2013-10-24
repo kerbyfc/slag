@@ -3,10 +3,13 @@
 ###
 Slag.register class DbInput extends Slag.Input
 
-  langs: null
+  val: null
 
   options:
     all: true
+
+  events:
+    'change':'change'
 
   constructor: ->
     super
@@ -20,7 +23,10 @@ Slag.register class DbInput extends Slag.Input
       @render()
 
   render: =>
-    app.log @$el
     for db in @dbs.getModels()
-      app.log "+ ", db.get('name')
       @$el.append $("<option value='#{db.get 'name'}'>#{db.get 'name'}</option>")
+    @change()
+
+  change: =>
+    @val = @$el.find('option:selected').val()
+    @dbs.findWhere name: @val

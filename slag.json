@@ -1,0 +1,6 @@
+{
+  "name" : "h2",
+  "db" : "/Users/kerbyfc/slag",
+  "make-pool?" : true,
+  "cfghome" : "/Users/kerbyfc/projects/slag/slag.json"
+}

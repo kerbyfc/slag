@@ -10,11 +10,37 @@
             [cheshire.core :refer :all]
             [com.github.ragnard.hamelito.hiccup :as haml]))
 
+(defn body-as-string [ctx]
+  (if-let [body (get-in ctx [:request :body])]
+    (condp instance? body
+      java.lang.String body
+      (slurp (clojure.java.io/reader body)))))
+
+(defn parse-json [context key]
+  (when (#{:put :post} (get-in context [:request :request-method]))
+    (try
+      (if-let [body (body-as-string context)]
+        (let [data (parse-string body true)]
+          [false {key data}])
+        {:message "No body"})
+      (catch Exception e
+        (.printStackTrace e)
+        {:message (format "IOException: " (.getMessage e))}))))
+
+(defn check-content-type [ctx content-types]
+  (if (#{:put :post} (get-in ctx [:request :request-method]))
+    (or
+     (some #{(get-in ctx [:request :headers "content-type"])}
+           content-types)
+     [false {:message "Unsupported Content-Type"}])
+    true))
 
 (def web-api {
               :service-available? (find-ns 'slag.config)
               :available-media-types ["application/json"]
               :allowed-methods [:get :put :post]
+              :malformed? #(parse-json % :data)
+              :known-content-type? #(check-content-type % ["application/json"])
               })
 
 (def stefon-setup
@@ -26,34 +52,17 @@
    :precompiles ["./assets/app.js.stefon"]
    })
 
-(defn html
-  [temp]
-  (haml/html temp))
-
 (defn alink
+  "Make link to compiled assets"
   [asset]
   (stefon/link-to-asset asset stefon-setup))
 
-(defn usr-root
-  []
-  (reval.core/locate-user-root))
-
-(defn app-root
-  []
-  (let [root (reval.core/locate-application-root 'slag.web)]
-    (if (reval.core/jar? root)
-      (reval.core/location root)
-      root)))
-
 (defn embed
+  "Replaces text by pattern"
   [t k v]
   (clojure.string/replace t (re-pattern (name k)) v))
 
-(defn get-available-dbs
-  []
-  (generate-string slag.db/dbs))
-
-(reval 'slag.web "api" (use 'cwk.core 'slag.web))
+(reval 'slag.web "api" (use 'cwk.core 'slag.utils 'cheshire.core))
 
 (def handler (wrapped-handler ->
                               ring.middleware.params/wrap-params

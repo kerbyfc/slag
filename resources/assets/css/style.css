@@ -30,9 +30,38 @@ html, body {
   padding: 10px;
 }
 
+.pl-10 {
+  padding-left: 10px;
+}
+
+.pt-10 {
+  padding-top: 10px;
+}
+
+.overhide {
+  overflow: hidden;
+}
+
+.brw {
+  word-wrap: break-word;
+}
+
+.lh-inherit {
+  line-height: inherit !important;
+}
+
+.va-top {
+  vertical-align: top;
+}
+
 .width-100 {
   width: 100%;
 }
+
+.width-50 {
+  width: 50%;
+}
+
 .rowfix {
   margin-left: 0;
 }
@@ -413,3 +442,11 @@ a {
   margin-bottom: 0;
 }
 
+.i-desc {
+  color: #333;
+}
+
+.i-label {
+  font-weight: bold;
+  color: #555;
+}

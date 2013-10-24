@@ -25,6 +25,21 @@
                (clojure.string/split #"\/")
                drop-last)))
 
+(defn usr-root
+  []
+  (reval.core/locate-user-root))
+
+(defn app-root
+  []
+  (let [root (reval.core/locate-application-root 'slag.web)]
+    (if (reval.core/jar? root)
+      (reval.core/location root)
+      root)))
+
+(defn get-root
+  [what?]
+  ((find-var (clojure.core/symbol (str "slag.utils/" what? "-root")))))
+
 (defn in-path?
   "search entry in classpath"
   [query]

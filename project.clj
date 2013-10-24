@@ -7,28 +7,26 @@
 
                  [org.clojure/clojure "1.5.1"]
 
-                 [cwk "0.1.4-SNAPSHOT"]
-                 [reval "0.1.1-SNAPSHOT"]
-
 								 ; UTILS
+                 [cheshire "5.2.0"]
+                 [reval "0.1.1-SNAPSHOT"]
                  [clojurewerkz/quartzite "1.1.0"]
                  [com.github.ragnard/hamelito "0.2.1"]
+
+                 ; WEB
+                 [cwk "0.1.4-SNAPSHOT"]
                  [circleci/stefon "0.5.0-SNAPSHOT"]
 
-								 [org.clojure/clojure-contrib "1.2.0"]
-                 [org.clojure/tools.namespace "0.2.4"]
-                 [cheshire "5.2.0"]
+                 ; DATABASE
+                 [korma "0.3.0-RC5"]
+                 [lobos "1.0.0-beta1"]
+                 [org.clojars.puppetdb/postgresql "9.2-1002.jdbc4"]
+                 [com.h2database/h2 "1.3.170"] ; TODO check
+                 [org.xerial/sqlite-jdbc "3.7.2"] ; TODO check
 
-
-								 ; WEB STACK
-								 ;[ring/ring-jetty-adapter "1.2.0"]
-                 ;[compojure "1.1.5"]
-                 ;[liberator "0.9.0"]
-
-								 ; SYSLOG STACK
+								 ; SYSLOG
                  [org.syslog4j/syslog4j "0.9.30"]
 								 [com.sun.jna/jna "3.0.9"]
-
 								 [org.apache.directory.studio/org.apache.commons.pool "1.6"]
                  [org.apache.directory.studio/org.apache.logging.log4j "1.2.17"]
 

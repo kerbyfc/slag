@@ -5,18 +5,49 @@
 
   %p
     Для хранения настроек используется конфигурационный файл,
-    располагающийся в корне домашней директории пользователя,
-    от имени которого было запущего приложение.
+    который может располагаться в корне домашней директории пользователя,
+    от имени которого было запущего приложение, или в директории, содержащий дистрибутив.
 
-  %p
-    Выберите директорию для хранения конфигурационного файла:
+  %table
+    %tr
+      %td.va-top.width-50
 
-  %p
-    %input{ :type => "radio", :name => "cfg_dir", :value => "usr"}
-    = window.env.usr
+        %fieldset
 
-  %p
-    %input{ :type => "radio", :name => "cfg_dir", :value => "app"}
-    = window.env.app
+          %legend
+            Файл конфигурации
 
-  %select.database-selector
+          %p
+            Выберите размещение конфигурационного файла:
+
+          .pl-10
+
+            %p
+              %label.radio.brw{ :style => "max-width: 500px;"}
+                %input.cfghome{ :type => "radio", :name => "cfghome", :value => "usr", :checked => true }
+                = "#{window.env.usr}/slag.json"
+
+            %p
+              %label.radio.brw{ :style => "max-width: 500px;"}
+                %input.cfghome{ :type => "radio", :name => "cfghome", :value => "app"}
+                = "#{window.env.app}/slag.json"
+
+            %span.glyphicon.glyphicon-exclamation-sign.lh-inherit
+              При запуске первоочередно проверяется наличие конфигурационного файла
+              в домашней директории пользователя, запустившего приложение, в этом случае файл конфигурации,
+              наxодящийся в директории дистрибутива будет игнорирован.
+
+      %td.va-top.width-50
+
+        %fieldset
+
+          %legend
+            Настройки базы даннныx
+
+          .pl-10
+            %select.database-selector
+
+          %form.database-form
+
+  .padding-10
+    %input.btn.btn-primary{ :type => "submit", :value => "Подтвердить" }
