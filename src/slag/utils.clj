@@ -1,13 +1,5 @@
-(ns slag.utils
-  (:use
-   [clojure.string :only [join split]]
-   slag.core)
-  (:require
-   [clojure.string :refer [trim]]
-   [clojure.inspector :as clj-inspector]
-   [clojure.java.io :refer [file]])
-  (:import
-   [java.lang.reflect]))
+(ns slag.utils)
+(in-ns 'slag.core)
 
 (defn get-classpath
   "show java classpath or classpath of concrete library"
@@ -38,7 +30,7 @@
 
 (defn get-root
   [what?]
-  ((find-var (clojure.core/symbol (str "slag.utils/" what? "-root")))))
+  ((find-var (clojure.core/symbol (str what? "-root")))))
 
 (defn get-config-path
   [from]
@@ -91,14 +83,6 @@
         lc (if (chk-char body "(" first) "" "(")]
   (eval (read-string (str "#" lc body rc)))))
 
-(defn !
-  "Inspect object in swing interface"
-  [obj]
-  (def frame (clj-inspector/inspect-tree obj))
-  (doto frame
-    (.setAlwaysOnTop true))
-  (println (.getDeclaredMethods obj)))
-
 (defmacro do-while
   "Repeatedly executes body while test expression is true. Presumes
   some side-effect will cause test to become false/nil. Returns nil"
@@ -111,3 +95,5 @@
 (defmacro def-by-keyword
   [kwd value]
   `(def ~(symbol (clojure.core/name kwd)) ~value))
+
+(defn hi [] (println "HI!"))

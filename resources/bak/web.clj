@@ -1,14 +1,5 @@
-(ns slag.web
-  (:gen-class)
-  (:use cwk.core
-        reval.core
-        slag.db
-        slag.utils)
-  (:require ring.middleware.params
-            liberator.dev
-            [stefon.core :as stefon]
-            [cheshire.core :refer :all]
-            [com.github.ragnard.hamelito.hiccup :as haml]))
+(ns slag.web)
+(in-ns 'slag.core)
 
 (defn body-as-string [ctx]
   (if-let [body (get-in ctx [:request :body])]
@@ -62,7 +53,7 @@
   [t k v]
   (clojure.string/replace t (re-pattern (name k)) v))
 
-(reval 'slag.web "api" (use 'cwk.core 'slag.utils 'cheshire.core))
+(reval 'slag.core "api" (use 'cwk.core 'slag.utils 'cheshire.core))
 
 (def handler (wrapped-handler ->
                               ring.middleware.params/wrap-params
