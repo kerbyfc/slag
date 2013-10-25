@@ -34,7 +34,8 @@
     :only [defres
            defresources
            wrapped-handler
-           run]]
+           run
+           =>]]
 
    [stefon.core :as stefon
     :only [

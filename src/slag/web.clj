@@ -55,17 +55,13 @@
 
 (reval 'slag.core "api")
 
+(if (setup)
+    (open-global-connection))
+
 (def handler (wrapped-handler ->
                               ring.middleware.params/wrap-params
                               (stefon/asset-pipeline stefon-setup)
                               (liberator.dev/wrap-trace :header :ui)))
-
-(if (setup)
-  (do
-    (println ">>>>>>>>IS UP? " (isUp?))
-    (open-global-connection)
-    )
-  (println " FAILED "))
 
 (defn start-service
   [opts]

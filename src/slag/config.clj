@@ -1,9 +1,12 @@
 (ns slag.config)
 (in-ns 'slag.core)
 
-(declare global-conn-conf)
-
+(def global-conn-conf nil)
 (def global-conn-established? false)
+
+(defn isUp?
+  []
+  (not (nil? (find-var 'slag.core/conf))))
 
 (defn get-db-conn-options
   ([dbtype options]
@@ -11,8 +14,6 @@
      (helper options))
    )
   ([]
-   (println (isUp?))
-   (println (get (find-var 'slag.core/conf) :name))
    (if (isUp?)
      (get-db-conn-options (get (lget 'slag.core/conf) :name) (lget 'slag.core/conf))))
   )
@@ -30,7 +31,7 @@
        )
      )
    (if global-conn-established?
-     (lobos.core/migrate)))
+     (migrate)))
   ([]
    (open-global-connection (get-db-conn-options))
    ))
@@ -57,10 +58,6 @@
     (if (reval.core/jar? root)
       (reval.core/location root)
       root)))
-
-(defn isUp?
-  []
-  (not (nil? (find-var 'slag.core/conf))))
 
 (defn setup
   "Try to load config files"
