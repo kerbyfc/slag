@@ -1,6 +1,7 @@
 (ns slag.utils
   (:use
-   [clojure.string :only [join split]])
+   [clojure.string :only [join split]]
+   slag.core)
   (:require
    [clojure.string :refer [trim]]
    [clojure.inspector :as clj-inspector]
@@ -18,6 +19,12 @@
     (println found)
     found))
 
+(defn lget
+  "Lazy var get"
+  [s]
+  (if-let [v (find-var s)]
+    (var-get v)))
+
 (defn pwd []
   (clojure.string/join "/" (-> *file*
                java.io.File.
@@ -29,6 +36,18 @@
   []
   (reval.core/locate-user-root))
 
+(defn get-root
+  [what?]
+  ((find-var (clojure.core/symbol (str "slag.utils/" what? "-root")))))
+
+(defn get-config-path
+  [from]
+  (str (get-root from) "/slag.json"))
+
+(defn load-config
+ [from]
+ (cheshire.core/parse-stream (clojure.java.io/reader (get-config-path from)) true))
+
 (defn app-root
   []
   (let [root (reval.core/locate-application-root 'slag.web)]
@@ -36,9 +55,20 @@
       (reval.core/location root)
       root)))
 
-(defn get-root
-  [what?]
-  ((find-var (clojure.core/symbol (str "slag.utils/" what? "-root")))))
+(defn isUp?
+  []
+  (not (nil? (find-var 'slag.core/config))))
+
+(defn setup
+  "Try to load config files"
+  []
+  (try
+    (intern 'slag.core 'config (load-config "usr"))
+    (catch Exception e
+      (try
+        (intern 'slag.core 'config (load-config "app"))
+        (catch Exception e))))
+  (isUp?))
 
 (defn in-path?
   "search entry in classpath"

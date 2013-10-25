@@ -36,7 +36,7 @@
     true))
 
 (def web-api {
-              :service-available? (find-ns 'slag.config)
+              :service-available? (isUp?)
               :available-media-types ["application/json"]
               :allowed-methods [:get :put :post]
               :malformed? #(parse-json % :data)
@@ -68,6 +68,14 @@
                               ring.middleware.params/wrap-params
                               (stefon/asset-pipeline stefon-setup)
                               (liberator.dev/wrap-trace :header :ui)))
+
+(if (setup)
+  (do
+    (println ">>>>>>>>IS UP? " (isUp?))
+    (println slag.core/config)
+    (open-global-connection)
+    )
+  (println " FAILED "))
 
 (defn start-service
   [opts]
