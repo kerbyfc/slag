@@ -59,6 +59,33 @@
       (reval.core/location root)
       root)))
 
+;;;;;;;;;;;;;;;;;;; JUST DO TI! ) ;;;;;;;;;;;;;;;;;;;;
+
+
+(def awaked? (ref false))
+
+(def awake (memoize #(do
+											 (println "HI")
+											 (dosync
+												(ref-set awaked? true))
+											 true)))
+
+(defn wake-up
+	[]
+	(try
+		(awake)
+		(catch Exception e
+			(dosync
+			 (ref-set awaked? false))
+			false)))
+
+(wake-up)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
 (defn setup
   "Try to load config files"
   []
