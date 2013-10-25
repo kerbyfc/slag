@@ -4,6 +4,35 @@
 (def global-conn-conf nil)
 (def global-conn-established? false)
 
+;;;;; APPLICATION LOCATING ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn usr-root
+  []
+  (reval.core/locate-user-root))
+
+(defn app-root
+  []
+  (let [root (reval.core/locate-application-root 'slag.web)]
+    (if (reval.core/jar? root)
+      (reval.core/location root)
+      root)))
+
+(defn get-root
+  [what?]
+  ((find-var (clojure.core/symbol (str "slag.core/" what? "-root")))))
+
+;;;;; CONFIG LOADING ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn get-config-path
+  [from]
+  (str (get-root from) "/slag.json"))
+
+(defn load-config
+ [from]
+ (cheshire.core/parse-stream (clojure.java.io/reader (get-config-path from)) true))
+
+;;;;; CONNECTION AWAIKING ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (defn isUp?
   []
   (not (nil? (find-var 'slag.core/conf))))
@@ -36,33 +65,17 @@
    (open-global-connection (get-db-conn-options))
    ))
 
-(defn usr-root
-  []
-  (reval.core/locate-user-root))
 
-(defn get-root
-  [what?]
-  ((find-var (clojure.core/symbol (str "slag.core/" what? "-root")))))
 
-(defn get-config-path
-  [from]
-  (str (get-root from) "/slag.json"))
-
-(defn load-config
- [from]
- (cheshire.core/parse-stream (clojure.java.io/reader (get-config-path from)) true))
-
-(defn app-root
-  []
-  (let [root (reval.core/locate-application-root 'slag.web)]
-    (if (reval.core/jar? root)
-      (reval.core/location root)
-      root)))
 
 ;;;;;;;;;;;;;;;;;;; JUST DO TI! ) ;;;;;;;;;;;;;;;;;;;;
 
 
 (def awaked? (ref false))
+
+(defn make-me-up
+
+	)
 
 (def awake (memoize #(do
 											 (println "HI")
