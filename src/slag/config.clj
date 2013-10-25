@@ -12,9 +12,9 @@
    )
   ([]
    (println (isUp?))
-   (println (get (find-var 'conf) :name))
+   (println (get (find-var 'slag.core/conf) :name))
    (if (isUp?)
-     (get-db-conn-options (get (lget 'conf) :name) (lget 'conf))))
+     (get-db-conn-options (get (lget 'slag.core/conf) :name) (lget 'slag.core/conf))))
   )
 
 (defn open-global-connection
@@ -34,3 +34,46 @@
   ([]
    (open-global-connection (get-db-conn-options))
    ))
+
+(defn usr-root
+  []
+  (reval.core/locate-user-root))
+
+(defn get-root
+  [what?]
+  ((find-var (clojure.core/symbol (str "slag.core/" what? "-root")))))
+
+(defn get-config-path
+  [from]
+  (str (get-root from) "/slag.json"))
+
+(defn load-config
+ [from]
+ (cheshire.core/parse-stream (clojure.java.io/reader (get-config-path from)) true))
+
+(defn app-root
+  []
+  (let [root (reval.core/locate-application-root 'slag.web)]
+    (if (reval.core/jar? root)
+      (reval.core/location root)
+      root)))
+
+(defn isUp?
+  []
+  (not (nil? (find-var 'slag.core/conf))))
+
+(defn setup
+  "Try to load config files"
+  []
+  (intern 'slag.core 'conf (load-config "usr"))
+  (intern 'slag.core 'conf (load-config "app"))
+
+  ;(try
+  ;  (intern 'slag.core 'conf (load-config "usr"))
+  ;  (catch Exception e
+  ;    (println "load usr conf" (.getMessage e))
+  ;    (try
+  ;      (intern 'slag.core 'conf (load-config "app"))
+  ;      (catch Exception e
+  ;        (println "load app conf" (.getMessage e))))))
+  (isUp?))

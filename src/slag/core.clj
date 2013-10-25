@@ -22,11 +22,13 @@
            location
            jar?]]
 
-   korma.db
-   korma.core
+   (korma db core)
 
-   [lobos.connectivity :exclude [default-connection]]
-   [lobos.core :only [migrate]]
+   (lobos
+    [connectivity
+     :only [open-global close-global]]
+    [core
+     :only [migrate]])
 
    [cwk.core :as cwk
     :only [defres
@@ -34,10 +36,10 @@
            wrapped-handler
            run]]
 
-   ;[stefon.core :as stefon
-   ; :only [
-   ;        link-to-asset
-   ;        asset-pipeline]]
+   [stefon.core :as stefon
+    :only [
+           link-to-asset
+           asset-pipeline]]
 
    [com.github.ragnard.hamelito.hiccup :as haml
     :only [html]]
@@ -51,6 +53,10 @@
    ))
 
 (load "utils")
+(load "lobos")
+(load "database")
+(load "config")
+(load "web")
 
 (defn -main
   "Run web service"

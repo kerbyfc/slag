@@ -4,7 +4,7 @@
    web-api
    {
     :service-available? true
-    :handle-ok (=> ctx (generate-string slag.db/dbs))
+    :handle-ok (=> ctx (generate-string databases-preset))
     :post! (=> ctx :request r :data cfg :data :name dbtype :data :cfghome home
                (let [dbc (get-db-conn-options dbtype cfg)
                      cfg (assoc cfg :cfghome (get-config-path home))]

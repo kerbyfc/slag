@@ -5,6 +5,9 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [
 
+                 ; FIXME lobos uses clojure 1.4
+                 [lobos "1.0.0-beta1"]
+
                  [org.clojure/clojure "1.5.1"]
 
 								 ; UTILS
@@ -18,9 +21,11 @@
                  [cwk "0.1.4-SNAPSHOT"]
                  [circleci/stefon "0.5.0-SNAPSHOT"]
 
+
+
                  ; DATABASE
-                 [korma "0.3.0-RC5"]
-                 [lobos "1.0.0-beta1"]
+                 [korma "0.3.0-RC6"]
+
                  [org.clojars.puppetdb/postgresql "9.2-1002.jdbc4"]
                  [com.h2database/h2 "1.3.170"] ; TODO check
                  [org.xerial/sqlite-jdbc "3.7.2"] ; TODO check
