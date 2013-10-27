@@ -22,7 +22,6 @@
                  [circleci/stefon "0.5.0-SNAPSHOT"]
 
 
-
                  ; DATABASE
                  [korma "0.3.0-RC6"]
 

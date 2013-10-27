@@ -56,8 +56,8 @@
 (load "utils")
 (load "lobos")
 (load "database")
-(load "config")
 (load "web")
+(load "init")
 
 (defn -main
   "Run web service"
