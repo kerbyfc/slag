@@ -7,11 +7,11 @@
       java.lang.String body
       (slurp (clojure.java.io/reader body)))))
 
-(defn parse-json [context key]
+(defn parse-json-body [context key]
   (when (#{:put :post} (get-in context [:request :request-method]))
     (try
       (if-let [body (body-as-string context)]
-        (let [data (parse-string body true)]
+        (let [data (parse-json body true)]
           [false {key data}])
         {:message "No body"})
       (catch Exception e
@@ -27,10 +27,10 @@
     true))
 
 (def web-api {
-              :service-available? (isUp?)
+              :service-available? config
               :available-media-types ["application/json"]
               :allowed-methods [:get :put :post]
-              :malformed? #(parse-json % :data)
+              :malformed? #(parse-json-body % :data)
               :known-content-type? #(check-content-type % ["application/json"])
               })
 
@@ -54,15 +54,3 @@
   (clojure.string/replace t (re-pattern (name k)) v))
 
 (reval 'slag.core "api")
-
-(if (setup)
-    (open-global-connection))
-
-(def handler (wrapped-handler ->
-                              ring.middleware.params/wrap-params
-                              (stefon/asset-pipeline stefon-setup)
-                              (liberator.dev/wrap-trace :header :ui)))
-
-(defn start-service
-  [opts]
-  (cwk.core/run handler opts))

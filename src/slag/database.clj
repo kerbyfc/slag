@@ -13,12 +13,6 @@
    }
 
    {
-    :name "sqlite3"
-    :db (str (locate-user-root) "/slag")
-    :make-pool? true
-   }
-
-   {
     :name "postgres"
     :user ""
     :db "slag"
@@ -37,12 +31,8 @@
    }
 
    {
-    :name "oracle"
-    :user ""
-    :password ""
-    :db "slag"
-    :host ""
-    :port ""
+    :name "sqlite3"
+    :db (str (locate-user-root) "/slag")
     :make-pool? true
    }
 

@@ -2,15 +2,19 @@
 
   (:gen-class)
 
+  (:refer-clojure)
+
   (:use
 
-   [cheshire.core :as ch
-    :only [generate-string
-           parse-stream
-           parse-string]]
+   [cheshire.core :rename {
+             generate-string to-json
+             parse-stream parse-json-stream
+             parse-string parse-json
+             }]
 
    [clojure.string :as cstr
     :only [split
+           lower-case
            trim]
     :rename {replace str-replace
              join str-join}]
@@ -25,6 +29,7 @@
    (korma db core)
 
    (lobos
+    migrations
     [connectivity
      :only [open-global close-global]]
     [core
@@ -54,16 +59,24 @@
    ))
 
 (load "utils")
-(load "lobos")
 (load "database")
-(load "web")
 (load "init")
+(load "web")
+
+(init)
+
+(to-json {:error setup-error})
+(to-json config)
+
+(def handler (wrapped-handler ->
+                              ring.middleware.params/wrap-params
+                              (stefon/asset-pipeline stefon-setup)
+                              (liberator.dev/wrap-trace :header :ui)))
 
 (defn -main
   "Run web service"
   [& args]
-  (hi)
-  ;(start-service {:port 8000})
+    (cwk.core/run handler {:port 8000})
   )
 
 

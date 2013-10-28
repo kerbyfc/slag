@@ -4,14 +4,20 @@
    web-api
    {
     :service-available? true
-    :handle-ok (=> ctx (generate-string databases-preset))
-    :post! (=> ctx :request r :data cfg :data :name dbtype :data :cfghome home
-               (let [dbc (get-db-conn-options dbtype cfg)
+    :post! (=> ctx :data cfg :data :cfghome home
+               (let [dbc (slag.core/get-db-conn-options cfg)
                      cfg (assoc cfg :cfghome (get-config-path home))]
-                 (println cfg)
-                 (open-global-connection dbc)
-                 (spit (str (:cfghome cfg) ) (generate-string cfg {:pretty true}))
-                 (setup)
-                 (generate-string {:configured (isUp?)})
+                   (spit (str (:cfghome cfg) ) (to-json cfg {:pretty true}))
+                   (println ">>>>>>>>>>>>> init = " (init))
+                   (if-let [conf (init)]
+                     (do
+                       (println conf )
+                       (to-json conf))
+                     (do
+                       (println (to-json {:error setup-error}))
+                       (to-json {:error setup-error}))
+                     )
                  ))
+
+    :handle-ok (=> ctx (to-json databases-preset))
     }))

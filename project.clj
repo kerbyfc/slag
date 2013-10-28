@@ -5,9 +5,6 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [
 
-                 ; FIXME lobos uses clojure 1.4
-                 [lobos "1.0.0-beta1"]
-
                  [org.clojure/clojure "1.5.1"]
 
 								 ; UTILS
@@ -20,7 +17,6 @@
                  ; WEB
                  [cwk "0.1.4-SNAPSHOT"]
                  [circleci/stefon "0.5.0-SNAPSHOT"]
-
 
                  ; DATABASE
                  [korma "0.3.0-RC6"]
@@ -35,6 +31,8 @@
 								 [org.apache.directory.studio/org.apache.commons.pool "1.6"]
                  [org.apache.directory.studio/org.apache.logging.log4j "1.2.17"]
 
+                 [org.clojure/tools.macro "0.1.1"]
+
 								 ; MYCROFT STACK
 								 ;[hiccup "0.3.5"]
 								 ;[org.clojure/tools.logging "0.1.2"]
@@ -43,7 +41,7 @@
                  ;[compojure "1.1.5"]
 
                  ]
-  :ring {:handler slag.web/handler
+  :ring {:handler slag.core/handler
          :port 8000
          :auto-reload? true}
   :java-source-paths ["src/slag/java"]

@@ -1,6 +1,9 @@
 (ns slag.init)
 (in-ns 'slag.core)
 
+(def config nil)
+(def setup-error "")
+
 ;;;;; APPLICATION LOCATING ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn usr-root
@@ -26,24 +29,22 @@
 
 (defn load-config
  [from]
- (cheshire.core/parse-stream (clojure.java.io/reader (get-config-path from)) true))
+ (parse-json-stream (clojure.java.io/reader (get-config-path from)) true))
 
-;;;;; CONNECTION AWAIKING ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-(def config (ref {}))
-(def config-error (ref ""))
+;;;;; DATABASE CONNECTION ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn get-db-conn-options
 
-	([dbtype options]
-   (let [helper (find-var (clojure.core/symbol (str "korma.db/" dbtype)))]
-     (helper options)))
+	([conf]
+   (let [helper (find-var (clojure.core/symbol (lower-case (str "korma.db/" (:name conf)))))]
+     (helper conf)))
 
 	([]
-   (if (isUp?)
-     (get-db-conn-options (get (lget 'slag.core/conf) :name) (lget 'slag.core/conf))))
+   (if config
+     (get-db-conn-options config)))
   )
+
+;;;;; INITIALIZATION ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (def setup
 	(memoize
@@ -53,26 +54,24 @@
 
 			 (let [conf (load-config cfgtype)]
 
-				 (open-global conf) ; configure global db-connection
+         (println "CONF" conf cfgtype)
+
+         ; configure global db-connection
+				 (open-global (get-db-conn-options conf))
 				 (defdb db conf)
+         (migrate)
 
-				 (dosync
-					(ref-set config conf))
+				 (def config conf)
 
-				 conf) ; return config
+				 true) ; return config if all is good
 
 			 (catch Exception e ; store exception
-				 (dosync
-					(ref-set config-error (.getMessage e))))))))
-
-(defn initialize
-
-	)
+				 (do
+           (def setup-error (.getMessage e)))
+         )))))
 
 (defn init
-	(if-let [conf (setup "usr")]
-		(initialize)
-		(if-let [conf setup "app"])
-			(initialize)
-		))
-
+  []
+  (if-let [conf (setup "usr")]
+    conf
+    (setup "app")))
